@@ -1,28 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Document</title>
-	<link rel="stylesheet" href="style.css" />
-	<script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=C:\Users\kanek\dash\robo_dashboard, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-	<header>
-		<div class="left"><span id="connected">Connected</span></div>
-		<div class="right">
-			<div id="batteryVoltage">--</div>
-			<div id="variable-menu-button">M</div>
-		</div>
-	</header>
-	<div id="telemetry"></div>
+<div class="header">
+    <div id="connection-status">Connected</div>
+    <div class="battery-container">
+        <div id="battery-voltage">15V</div>
+        <div class="battery">
+            <div class="battery-fill" id="battery-fill"></div>
+        </div>
+    </div>
+    <div id="ping-time">3ms</div>
+</div>
 
-	<p id="error"></p>
+<div class="main-container">
+    <div class="left-panel">
+        <div class="section-title">Select an OpMode</div>
+        <div class="mode-selector">
+            <button class="mode-button" id="auto-btn">
+                <span>Auto</span>
+                <span class="arrow">▼</span>
+            </button>
+            <button class="init-button">INIT</button>
+            <button class="mode-button" id="teleop-btn">
+                <span>Teleop</span>
+                <span class="arrow">▼</span>
+            </button>
+        </div>
+        <div class="telemetry">
+            <div class="section-title">Telemetry</div>
+            <div class="telemetry-item" id="telemetry-imibagpula">imibagpula: 123</div>
+            <div class="telemetry-item" id="telemetry-misu">misu: suge pula</div>
+        </div>
+    </div>
 
-	<script src="script.js" defer></script>
+    <div class="center-panel">
+        <div class="arena-container">
+            <div class="arena-label">Arena</div>
+            <div alt="Arena Map" class="arena-image" id="arena-image"></div>
+            <div class="arena-data">
+                <div id="offset-x">offsetX: -72.00"</div>
+                <div id="offset-y">offsetY: 72.00"</div>
+                <div id="mouse-x">mouseX: 19.35"</div>
+                <div id="mouse-y">mouseY: 131.04"</div>
+                <div id="heading">heading: 270.00°</div>
+                <div id="flip-x">flipX: false</div>
+                <div id="flip-y">flipY: false</div>
+            </div>
+        </div>
+    </div>
 
+    <div class="right-panel">
+        <div class="section-title">Configurables</div>
+        <div class="configurables">
+            <div class="config-item">
+                <span>TestVar:</span>
+                <span id="test-var">392.00</span>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="save-button">Save</button>
+            <button class="refresh-button">Refresh</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="mode-modal">
+    <div class="modal-content">
+        <div class="modal-title" id="modal-title">Select Mode</div>
+        <button class="modal-option" data-mode="autonomous-1">Autonomous Mode 1</button>
+        <button class="modal-option" data-mode="autonomous-2">Autonomous Mode 2</button>
+        <button class="modal-option" data-mode="autonomous-3">Autonomous Mode 3</button>
+    </div>
+</div>
 </body>
-
 </html>
