@@ -321,6 +321,10 @@ body {
     background: #4e3d50;
 }
 
+.refresh-button svg {
+    width: 30px;
+}
+
 .modal-content {
     background: #3e2d40;
     padding: 30px;
