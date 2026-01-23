@@ -171,6 +171,12 @@ body {
     border: 2px solid #4a3557;
     border-radius: 8px;
 }
+.arena-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 
 .arena-data {
     margin-top: 15px;
@@ -394,4 +400,17 @@ body {
     background: #3e2d40;
     padding: 8px;
     border-radius: 5px;
+}
+
+.classContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.classVars {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.125rem;
 }

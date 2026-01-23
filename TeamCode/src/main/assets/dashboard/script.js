@@ -6,6 +6,33 @@ const autoBtn = document.getElementById("auto-btn");
 const teleopBtn = document.getElementById("teleop-btn");
 const modalTitle = document.getElementById("modal-title");
 const modalOptions = document.querySelectorAll(".modal-option");
+const classSelect = document.getElementById("class-select");
+
+
+const classes = [
+    {
+        class: "test123",
+        fields: [
+            {
+                var: "testvar123",
+                val: 67.420
+            }
+        ]
+    },
+    {
+        class: "testtest",
+        fields: [
+            {
+                var: "sigma",
+                val: "muieee"
+            },
+            {
+                var: "hehe",
+                val: 12345
+            }
+        ]
+    }
+];
 
 let currentModeType = "";
 
@@ -165,11 +192,66 @@ async function sendPing() {
     }
 }
 
+function createOptions() {
+    const defaultOption = document.createElement("option");
+    classSelect.add(defaultOption);
+    defaultOption.value = "default";
+    defaultOption.text = "--Select a Class--";
+
+    classes.forEach((classItem) => {
+        const option = document.createElement("option");
+        classSelect.add(option);
+        option.value = classItem.class;
+        option.text = `${classItem.class}`;
+    });
+}
+
+function createVariables() {
+    const className = document.getElementById("class-select").value;
+
+    const classFields = classes.find(c => c.class === className).fields;
+
+    const main = document.querySelector(".configurables");
+    const container = document.createElement("div");
+    main.appendChild(container);
+    container.className = "classContainer";
+
+    classFields.forEach((field) => {
+        const fieldDiv = document.createElement("div");
+        fieldDiv.className = "classVars";
+
+        const label = document.createElement("p");
+        label.textContent = field.var;
+
+        const input = document.createElement("input");
+
+        if(typeof field.val === "number") {
+            input.type = "number";
+            input.value = field.val;
+        } else {
+            input.type = "text";
+            input.value = field.val;
+        }
+
+        fieldDiv.appendChild(label);
+        fieldDiv.appendChild(input);
+        
+        container.appendChild(fieldDiv);    
+    });
+}
+
 function updatePingTime(time) { document.getElementById("ping-time").textContent = time; }
 
 updateBatteryVoltage();
 fetchTelemetry();
 sendPing();
+createOptions();
+
+classSelect.addEventListener("change", () => {
+    const classVars = document.querySelectorAll(".classVars");
+    classVars.forEach((varDiv) => varDiv.remove());
+    createVariables();
+});
 
 setInterval(updateBatteryVoltage, 1000);
 setInterval(fetchTelemetry, 100);
