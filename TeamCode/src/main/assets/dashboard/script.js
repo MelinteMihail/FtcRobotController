@@ -7,7 +7,11 @@ const teleopBtn = document.getElementById("teleop-btn");
 const modalTitle = document.getElementById("modal-title");
 const modalOptions = document.querySelectorAll(".modal-option");
 const classSelect = document.getElementById("class-select");
+const arenaImage = document.getElementById('arena-image');
+const coordDisplay = document.getElementById('coord-display');
 
+const ARENA_WIDTH_INCHES = 72;
+const ARENA_HEIGHT_INCHES = 72;
 
 const classes = [
     {
@@ -249,8 +253,39 @@ createOptions();
 
 classSelect.addEventListener("change", () => {
     const classVars = document.querySelectorAll(".classVars");
+    const classContainers = document.querySelectorAll(".classContainer");
+
+    if(classContainers.length >= 2) {
+      classContainers[0].remove();
+    }
+
     classVars.forEach((varDiv) => varDiv.remove());
+    
     createVariables();
+});
+
+arenaImage.addEventListener('mousemove', (e) => {
+    const rect = arenaImage.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const flippedY = rect.height - y;
+
+    const xInches = (x / rect.width) * ARENA_WIDTH_INCHES;
+    const yInches = (flippedY / rect.height) * ARENA_HEIGHT_INCHES;
+    
+    coordDisplay.textContent = `X: ${x.toFixed(0)}, Y: ${flippedY.toFixed(0)}`;
+
+    document.getElementById("offset-x").textContent = `offsetX: ${xInches.toFixed(2)}"`;
+    document.getElementById("offset-y").textContent = `offsetY: ${yInches.toFixed(2)}"`;
+});
+
+arenaImage.addEventListener('mouseleave', () => {
+    coordDisplay.textContent = 'X: 0, Y: 0';
+
+    document.getElementById("offset-x").textContent = `offsetX: 0.00"`;
+    document.getElementById("offset-y").textContent = `offsetY: 0.00"`;
 });
 
 setInterval(updateBatteryVoltage, 1000);
