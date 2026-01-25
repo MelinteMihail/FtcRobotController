@@ -147,10 +147,6 @@ body {
     font-size: 16px;
 }
 
-.arena-container {
-    margin: 20px 0;
-}
-
 .arena-label {
     font-size: 20px;
     margin-bottom: 10px;
@@ -266,7 +262,8 @@ body {
     font-family: 'Courier New', monospace;
     background: #241c27;
     color: white;
-    overflow: hidden;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .header {

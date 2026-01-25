@@ -84,23 +84,23 @@ function updateTelemetry(key, value) {
 }
 
 function updateArenaData(data) {
-  if (data.offsetX !== undefined)
-    document.getElementById("offset-x").textContent = `startOffsetX: ${data.offsetX}"`;
+  if (data.startOffsetX !== undefined)
+    document.getElementById("offset-x").textContent = `startOffsetX: ${data.startOffsetX}"`;
   
-  if (data.offsetY !== undefined)
-    document.getElementById("offset-y").textContent = `startOffsetY: ${data.offsetY}"`;
+  if (data.startOffsetY !== undefined)
+    document.getElementById("offset-y").textContent = `startOffsetY: ${data.startOffsetY}"`;
   
-  if (data.mouseX !== undefined)
+  if (data.startHeading !== undefined)
     document.getElementById("start-heading").textContent = `startHeading: ${data.startHeading}"`;
   
-  if (data.mouseY !== undefined)
+  if (data.currentX !== undefined)
     document.getElementById("current-x").textContent = `currentX: ${data.currentX}"`;
   
-  if (data.heading !== undefined)
-    document.getElementById("current-y").textContent = `currentY: ${data.currentY}°`;
+  if (data.currentY !== undefined)
+    document.getElementById("current-y").textContent = `currentY: ${data.currentY}"`;
   
-  if (data.flipX !== undefined)
-    document.getElementById("current-heading").textContent = `currentHeading: ${data.currentHeading}`;
+  if (data.currentHeading !== undefined)
+    document.getElementById("current-heading").textContent = `currentHeading: ${data.currentHeading}°`;
 }
 
 function updateTestVar(value) {
@@ -274,7 +274,7 @@ arenaImage.addEventListener('mousemove', (e) => {
     const xInches = (x / rect.width) * ARENA_WIDTH_INCHES;
     const yInches = (flippedY / rect.height) * ARENA_HEIGHT_INCHES;
     
-    coordDisplay.textContent = `X: ${x.toFixed(0)}, Y: ${flippedY.toFixed(0)}`;
+    coordDisplay.textContent = `X: ${xInches.toFixed(2)}", Y: ${yInches.toFixed(2)}"`;
 });
 
 arenaImage.addEventListener('mouseleave', () => {
