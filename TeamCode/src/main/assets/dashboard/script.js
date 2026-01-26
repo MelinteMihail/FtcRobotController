@@ -1,14 +1,13 @@
 const API_BASE = window.location.origin;
 
-// Modal handling
 const modal = document.getElementById("mode-modal");
 const autoBtn = document.getElementById("auto-btn");
 const teleopBtn = document.getElementById("teleop-btn");
-const modalTitle = document.getElementById("modal-title");
-const modalOptions = document.querySelectorAll(".modal-option");
 const classSelect = document.getElementById("class-select");
 const arenaImage = document.getElementById('arena-image');
 const coordDisplay = document.getElementById('coord-display');
+const autoModal = document.querySelector(".auto-modal");
+const teleopModal = document.querySelector(".teleop-modal");
 
 const ARENA_WIDTH_INCHES = 72;
 const ARENA_HEIGHT_INCHES = 72;
@@ -38,35 +37,39 @@ const classes = [
     }
 ];
 
-let currentModeType = "";
+const modes = {
+  teleop: ["test", "sigma"],
+  auto: ["skibidi", "sixseven"]
+}
 
-autoBtn.addEventListener("click", () => {
-  currentModeType = "auto";
-  modalTitle.textContent = "Select Auto Mode";
-  modal.style.display = "flex";
-});
+let currentModeType = "", currentMode = "";
+let opmodeTitle = document.querySelector(".opmode-title");
 
-teleopBtn.addEventListener("click", () => {
-  currentModeType = "teleop";
-  modalTitle.textContent = "Select Teleop Mode";
-  modal.style.display = "flex";
-});
+function sendDataToModal() {
+  const autoModes = modes.auto;
+  const autoModal = document.querySelector(".auto-modal");
 
-modalOptions.forEach((option) => {
-  option.addEventListener("click", (e) => {
-    modalOptions.forEach((opt) => opt.classList.remove("selected"));
-    e.target.classList.add("selected");
-    setTimeout(() => {
-      modal.style.display = "none";
-    }, 300);
+  autoModes.forEach((mode) => {
+    const autoOption = document.createElement("button");
+    
+    autoOption.classList.add("modal-option");
+    autoOption.textContent = mode;
+
+    autoModal.appendChild(autoOption);
   });
-});
 
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
-  }
-});
+  const teleopModes = modes.teleop;
+  const teleopModal = document.querySelector(".teleop-modal");
+
+  teleopModes.forEach((mode) => {
+    const teleopOption = document.createElement("button");
+
+    teleopOption.classList.add("modal-option");
+    teleopOption.textContent = mode;
+
+    teleopModal.appendChild(teleopOption);
+  });
+}
 
 function updateConnectionStatus(status) {
   document.getElementById("connection-status").textContent = status;
@@ -242,12 +245,40 @@ function createVariables() {
     });
 }
 
-function updatePingTime(time) { document.getElementById("ping-time").textContent = time; }
+function updatePingTime(time) { 
+  document.getElementById("ping-time").textContent = time; 
+}
 
-updateBatteryVoltage();
-fetchTelemetry();
-sendPing();
-createOptions();
+autoBtn.addEventListener("click", () => {
+  currentModeType = "auto";
+  autoModal.style.display = "block";
+  teleopModal.style.display = "none";
+  modal.style.display = "flex";
+});
+
+teleopBtn.addEventListener("click", () => {
+  currentModeType = "teleop";
+  teleopModal.style.display = "block";
+  autoModal.style.display = "none";
+  modal.style.display = "flex";
+});
+
+modal.addEventListener("click", (e) => {
+  if (e.target.classList.contains("modal-option")) {
+
+    document.querySelectorAll(".modal-option").forEach((opt) => opt.classList.remove("selected"));
+    e.target.classList.add("selected");
+    
+    currentMode = e.target.textContent;
+    opmodeTitle.textContent = currentMode;
+
+    modal.style.display = "none";
+  }
+  
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
 
 classSelect.addEventListener("change", () => {
     const classVars = document.querySelectorAll(".classVars");
@@ -281,6 +312,12 @@ arenaImage.addEventListener('mouseleave', () => {
     coordDisplay.textContent = 'X: 0, Y: 0';
     coordDisplay.style.display = "none";
 });
+
+sendDataToModal();
+updateBatteryVoltage();
+fetchTelemetry();
+sendPing();
+createOptions();
 
 setInterval(updateBatteryVoltage, 1000);
 setInterval(fetchTelemetry, 100);

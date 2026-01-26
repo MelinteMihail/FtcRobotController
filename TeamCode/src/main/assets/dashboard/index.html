@@ -21,7 +21,7 @@
 
 <div class="main-container">
     <div class="left-panel">
-        <div class="section-title">Select an OpMode</div>
+        <div class="section-title opmode-title">Select an OpMode</div>
         <div class="mode-selector">
             <button class="mode-button" id="auto-btn">
                 <span>Auto</span>
@@ -81,10 +81,12 @@
 
 <div class="modal" id="mode-modal">
     <div class="modal-content">
-        <div class="modal-title" id="modal-title">Select Mode</div>
-        <button class="modal-option" data-mode="autonomous-1">Autonomous Mode 1</button>
-        <button class="modal-option" data-mode="autonomous-2">Autonomous Mode 2</button>
-        <button class="modal-option" data-mode="autonomous-3">Autonomous Mode 3</button>
+        <div class="teleop-modal">
+            <div class="modal-title" id="modal-title">Select TeleOp Mode</div>
+        </div>
+        <div class="auto-modal">
+            <div class="modal-title" id="modal-title">Select Auto Mode</div>
+        </div>
     </div>
 </div>
 </body>

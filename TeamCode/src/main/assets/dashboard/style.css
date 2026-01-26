@@ -457,6 +457,10 @@ body {
     padding: 12px;
 }
 
+.auto-modal,
+.teleop-modal {
+    display: none;
+}
 
 
 
