@@ -271,10 +271,13 @@ body {
 
 .header .right {
     display: flex;
+    align-items: center;
     gap: 2rem;
 }
 
 .header .right .menu {
+    display: flex;
+    align-items: center;
     cursor: pointer;
     fill: #fff;
 }
