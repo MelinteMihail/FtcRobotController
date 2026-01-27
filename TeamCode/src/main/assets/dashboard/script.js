@@ -8,9 +8,22 @@ const arenaImage = document.getElementById('arena-image');
 const coordDisplay = document.getElementById('coord-display');
 const autoModal = document.querySelector(".auto-modal");
 const teleopModal = document.querySelector(".teleop-modal");
+const stateButton = document.querySelector(".state-button");
+const unitButton = document.querySelector(".unit-button");
 
 const ARENA_WIDTH_INCHES = 72;
 const ARENA_HEIGHT_INCHES = 72;
+
+const robotDimensions = {
+  width: 12,
+  length: 12
+}
+
+const data = {
+  currentX: 36,
+  currentY: 36,
+  currentHeading: 0
+}
 
 const classes = [
     {
@@ -39,11 +52,55 @@ const classes = [
 
 const modes = {
   teleop: ["test", "sigma"],
-  auto: ["skibidi", "sixseven"]
+  auto: ["Auto Far Rosu", "Auto Close Rosu", "Auto Far Albastru", "Auto Close Albastru"]
 }
 
 let currentModeType = "", currentMode = "";
 let opmodeTitle = document.querySelector(".opmode-title");
+let currentState = 0;
+
+stateButton.disabled = true;
+
+function setState(state) {
+  const button = document.querySelector(".state-button");
+
+  switch (state) {
+      case 0:
+        button.textContent = "INIT";
+        currentState = 0;
+        break;
+      case 1:
+        button.textContent = "START";
+        currentState = 1;
+        break;
+      case 2:
+        button.textContent = "STOP";
+        currentState = 2;
+        break;
+    }
+}
+
+function toggleState() {
+  stateButton.addEventListener("click", () => {
+    if (!checkAvailable()) return;
+
+    currentState = (currentState + 1) % 3;
+    setState(currentState);
+  });
+
+}
+
+function checkAvailable() {
+  const options = document.querySelectorAll(".modal-option");
+
+  for(const option of options) {
+    if(option.classList.contains("selected")) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 function sendDataToModal() {
   const autoModes = modes.auto;
@@ -87,11 +144,11 @@ function updateTelemetry(key, value) {
 }
 
 function updateArenaData(data) {
-  if (data.startOffsetX !== undefined)
-    document.getElementById("offset-x").textContent = `startOffsetX: ${data.startOffsetX}"`;
+  if (data.startX !== undefined)
+    document.getElementById("start-x").textContent = `startX: ${data.startX}"`;
   
-  if (data.startOffsetY !== undefined)
-    document.getElementById("offset-y").textContent = `startOffsetY: ${data.startOffsetY}"`;
+  if (data.startY !== undefined)
+    document.getElementById("start-y").textContent = `startY: ${data.startY}"`;
   
   if (data.startHeading !== undefined)
     document.getElementById("start-heading").textContent = `startHeading: ${data.startHeading}"`;
@@ -168,7 +225,7 @@ async function fetchTelemetry() {
 
 function renderTelemetry(telemetry) {
   const container = document.getElementById('telemetry-content');
-  container.innerHTML = '';
+  container.textContent = '';
 
   for (const [key, entry] of Object.entries(telemetry)) {
     const p = document.createElement('p');
@@ -249,6 +306,43 @@ function updatePingTime(time) {
   document.getElementById("ping-time").textContent = time; 
 }
 
+function inchesToPixelsX(inches) {
+  return (inches / ARENA_WIDTH_INCHES) * arenaImage.clientWidth;
+}
+
+function inchesToPixelsY(inches) {
+  return (inches / ARENA_HEIGHT_INCHES) * arenaImage.clientHeight;
+}
+
+function inchesToCentimeters(inches) {
+  return inches * 2.54;
+}
+
+
+function createRobotShape() {
+  const robotShape = document.querySelector(".robot-shape");
+
+  const pxWidth  = inchesToPixelsX(robotDimensions.width);
+  const pxLength = inchesToPixelsY(robotDimensions.length);
+
+  const pxX = inchesToPixelsX(data.currentX);
+  const pxY = inchesToPixelsY(data.currentY);
+
+  robotShape.style.width  = `${pxWidth}px`;
+  robotShape.style.height = `${pxLength}px`;
+
+  robotShape.style.left = `${pxX - pxWidth / 2}px`;
+  robotShape.style.bottom = `${pxY - pxLength / 2}px`;
+
+
+  robotShape.style.transform = `rotate(${data.currentHeading}deg)`;
+
+  arenaImage.appendChild(robotShape);
+}
+
+
+createRobotShape();
+
 autoBtn.addEventListener("click", () => {
   currentModeType = "auto";
   autoModal.style.display = "block";
@@ -272,6 +366,7 @@ modal.addEventListener("click", (e) => {
     currentMode = e.target.textContent;
     opmodeTitle.textContent = currentMode;
 
+    stateButton.disabled = false;
     modal.style.display = "none";
   }
   
@@ -318,6 +413,9 @@ updateBatteryVoltage();
 fetchTelemetry();
 sendPing();
 createOptions();
+updateArenaData(data);
+setState(currentState);
+toggleState();
 
 setInterval(updateBatteryVoltage, 1000);
 setInterval(fetchTelemetry, 100);
