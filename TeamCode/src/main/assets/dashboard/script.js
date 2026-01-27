@@ -381,8 +381,15 @@ modal.addEventListener("click", (e) => {
 
     document.querySelectorAll(".modal-option").forEach((opt) => opt.classList.remove("selected"));
     e.target.classList.add("selected");
+
+    const newMode = e.target.textContent;
     
-    currentMode = e.target.textContent;
+    if (currentMode != newMode) {
+      currentState = 0;
+      setState(0);
+    }
+
+    currentMode = newMode;
     opmodeTitle.textContent = currentMode;
 
     stateButton.disabled = false;
@@ -391,6 +398,12 @@ modal.addEventListener("click", (e) => {
   
   if (e.target === modal) {
     modal.style.display = "none";
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.style.display === 'flex') {
+    modal.style.display = 'none';
   }
 });
 
