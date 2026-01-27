@@ -11,6 +11,7 @@ const teleopModal = document.querySelector(".teleop-modal");
 const stateButton = document.querySelector(".state-button");
 const unitButton = document.querySelector(".unit-button");
 const unitsSelect = document.getElementById("units");
+const refreshButton = document.querySelector(".refresh-button");
 
 const ARENA_WIDTH_INCHES = 72;
 const ARENA_HEIGHT_INCHES = 72;
@@ -448,6 +449,10 @@ unitsSelect.addEventListener("change", (e) => {
 arenaImage.addEventListener('mouseleave', () => {
     coordDisplay.textContent = 'X: 0, Y: 0';
     coordDisplay.style.display = "none";
+});
+
+refreshButton.addEventListener("click", () => {
+
 });
 
 sendDataToModal();
