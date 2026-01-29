@@ -306,12 +306,6 @@ body {
     color: var(--text-main);
 }
 
-.header .right .menu:hover .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
 .visible {
     opacity: 1;
     visibility: visible;
@@ -725,4 +719,12 @@ input:hover {
         font-size: 1rem;
         gap: 1.25rem;
     }
+}
+
+@media (hover: hover) {
+  .header .right .menu:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
 }
