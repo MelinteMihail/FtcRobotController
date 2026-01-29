@@ -306,13 +306,19 @@ body {
     color: var(--text-main);
 }
 
-.visible {
+.header .right .menu:hover .dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-.hidden {
+.header .right .menu:hover .dropdown.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.header .right .menu:hover .dropdown.hidden {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -719,12 +725,4 @@ input:hover {
         font-size: 1rem;
         gap: 1.25rem;
     }
-}
-
-@media (hover: hover) {
-  .header .right .menu:hover .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
 }
