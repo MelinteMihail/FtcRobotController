@@ -312,13 +312,13 @@ body {
     transform: translateY(0);
 }
 
-.header .right .menu:hover .dropdown.visible {
+.visible {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-.header .right .menu:hover .dropdown.hidden {
+.hidden {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
