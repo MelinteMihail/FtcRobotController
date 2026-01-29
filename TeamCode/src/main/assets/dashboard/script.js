@@ -456,9 +456,10 @@ window.addEventListener('resize', () => {
   createRobotShape();
 });
 
-menuButton.addEventListener("click", () => {
+menuButton.addEventListener("click", (e) => {
+  e.stopPropagation();
   const dropdown = document.querySelector(".dropdown");
-
+  
   dropdown.classList.toggle("visible");
 });
 
