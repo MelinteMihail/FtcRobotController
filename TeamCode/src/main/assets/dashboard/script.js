@@ -12,6 +12,7 @@ const stateButton = document.querySelector(".state-button");
 const unitButton = document.querySelector(".unit-button");
 const unitsSelect = document.getElementById("units");
 const refreshButton = document.querySelector(".refresh-button");
+const menuButton = document.querySelector(".menu");
 
 const ARENA_WIDTH_INCHES = 72;
 const ARENA_HEIGHT_INCHES = 72;
@@ -453,6 +454,12 @@ arenaImage.addEventListener('mouseleave', () => {
 
 window.addEventListener('resize', () => {
   createRobotShape();
+});
+
+menuButton.addEventListener("click", () => {
+  const dropdown = document.querySelector(".dropdown");
+
+  dropdown.classList.toggle("visible");
 });
 
 refreshButton.addEventListener("click", () => {

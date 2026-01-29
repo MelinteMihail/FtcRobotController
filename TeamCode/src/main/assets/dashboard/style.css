@@ -312,6 +312,12 @@ body {
     transform: translateY(0);
 }
 
+.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
 .main-container {
     display: grid;
     grid-template-columns: 1.5fr 2fr 1.5fr;
