@@ -456,11 +456,13 @@ window.addEventListener('resize', () => {
   createRobotShape();
 });
 
-menuButton.addEventListener("click", (e) => {
-  e.stopPropagation();
+menuButton.addEventListener("click", () => {
   const dropdown = document.querySelector(".dropdown");
   
-  dropdown.classList.toggle("visible");
+  if(dropdown.classList.contains("visible")) {
+    dropdown.classList.remove("visible");
+    dropdown.classList.add("hidden");
+  }
 });
 
 refreshButton.addEventListener("click", () => {
