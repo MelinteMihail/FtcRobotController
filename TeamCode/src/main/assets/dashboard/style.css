@@ -694,6 +694,11 @@ input:hover {
     .header .right .menu:hover .dropdown {
         transform: translateY(0);
     }
+
+    .arena-data {
+        font-size: 1rem;
+        gap: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -714,5 +719,10 @@ input:hover {
         width: 80px;
         height: 80px;
         font-size: 18px;
+    }
+
+    .arena-data {
+        font-size: 1rem;
+        gap: 1.25rem;
     }
 }

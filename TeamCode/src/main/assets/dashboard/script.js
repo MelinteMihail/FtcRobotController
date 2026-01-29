@@ -456,10 +456,24 @@ window.addEventListener('resize', () => {
   createRobotShape();
 });
 
-menuButton.addEventListener("click", () => {
+menuButton.addEventListener("click", (e) => {
+  e.stopPropagation();
   const dropdown = document.querySelector(".dropdown");
   
   if(dropdown.classList.contains("visible")) {
+    dropdown.classList.remove("visible");
+    dropdown.classList.add("hidden");
+  } else {
+    dropdown.classList.remove("hidden");
+    dropdown.classList.add("visible");
+  }
+});
+
+document.addEventListener("click", (e) => {
+  const dropdown = document.querySelector(".dropdown");
+  const menu = document.querySelector(".menu");
+  
+  if (!menu.contains(e.target) && dropdown.classList.contains("visible")) {
     dropdown.classList.remove("visible");
     dropdown.classList.add("hidden");
   }
