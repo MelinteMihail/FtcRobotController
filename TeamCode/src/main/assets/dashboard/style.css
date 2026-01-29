@@ -606,3 +606,101 @@ input:hover {
     border-color: #7e6d80;
     box-shadow: 0 4px 12px rgba(110, 93, 112, 0.3);
 }
+
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .left-panel,
+    .center-panel,
+    .right-panel {
+        min-height: auto;
+    }
+
+    .arena-image {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        aspect-ratio: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+
+    .header .left,
+    .header .middle,
+    .header .right {
+        flex: 1;
+        min-width: 0;
+    }
+
+    #connection-status,
+    #battery-voltage,
+    #ping-time {
+        font-size: 14px;
+    }
+
+    .battery {
+        width: 50px;
+        height: 25px;
+        border: 2px solid white;
+    }
+
+    .battery::after {
+        width: 4px;
+        height: 11px;
+        top: 6px;
+    }
+
+    .battery-container {
+        gap: 5px;
+    }
+
+    .header .right {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .header .right .menu svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .dropdown {
+        right: 0;
+        left: auto;
+        transform: translateY(-10px);
+    }
+
+    .header .right .menu:hover .dropdown {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 20px;
+    }
+
+    .arena-label {
+        font-size: 18px;
+    }
+
+    .modal-content {
+        min-width: 90%;
+        padding: 20px;
+    }
+
+    .state-button {
+        width: 80px;
+        height: 80px;
+        font-size: 18px;
+    }
+}

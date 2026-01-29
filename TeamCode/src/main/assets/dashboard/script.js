@@ -451,6 +451,10 @@ arenaImage.addEventListener('mouseleave', () => {
     coordDisplay.style.display = "none";
 });
 
+window.addEventListener('resize', () => {
+  createRobotShape();
+});
+
 refreshButton.addEventListener("click", () => {
 
 });
