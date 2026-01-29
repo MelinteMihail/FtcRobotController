@@ -269,6 +269,26 @@ body {
     align-items: center;
 }
 
+.header .left,
+.header .middle,
+.header .right {
+    display: flex;
+    align-items: center;
+
+}
+
+.header .left {
+    justify-content: start;
+}
+
+.header .middle {
+    justify-content: center;
+}
+
+.header .right {
+    justify-content: end;
+}
+
 .header .right {
     display: flex;
     align-items: center;
