@@ -469,8 +469,12 @@ menuButton.addEventListener("click", (e) => {
   }
 });
 
+const dropdown = document.querySelector(".dropdown");
+dropdown.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
 document.addEventListener("click", (e) => {
-  const dropdown = document.querySelector(".dropdown");
   const menu = document.querySelector(".menu");
   
   if (!menu.contains(e.target) && dropdown.classList.contains("visible")) {

@@ -300,17 +300,11 @@ body {
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
-
     background: var(--bg-surface);
     border: 2px solid var(--border-bright);
     color: var(--text-main);
 }
 
-.header .right .menu:hover .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
 
 .visible {
     opacity: 1;
